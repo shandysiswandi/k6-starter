@@ -33,7 +33,7 @@ export function setup() {
  * 
  * Example: Make https requests, validate responses and data, simulate user behavior
  */
-export default function (data) {
+export default (data) => {
   console.log(`No scenarios in test.json. Executing ${data.name} default function...`);
 }
 

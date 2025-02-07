@@ -1,9 +1,13 @@
 const ConfigEnv = {
     dev: {
-        baseURLapi: "https://test-api.k6.io",
+        baseUrlHttpApi: "https://fakestoreapi.com",
+        baseUrlGrpcApi: "localhost:6660",
+        protobufPath: `${__ENV.PWD}/protobufs`
     },
     stg: {
-        baseURLapi: "https://test-api.k6.io",
+        baseUrlHttpApi: "https://fakestoreapi.com",
+        baseUrlGrpcApi: "localhost:6660",
+        protobufPath: `${__ENV.PWD}/protobufs`
     },
 };
 

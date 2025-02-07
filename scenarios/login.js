@@ -1,4 +1,4 @@
-import { check } from "k6";
+import { check, fail } from "k6";
 import http from "k6/http";
 import { Config } from "../config.js";
 
@@ -7,18 +7,35 @@ export const options = {
         scenarioLogin: {
             exec: "scenarioLogin",
             executor: "constant-vus",
-            duration: "10s",
-            vus: 10,
+            duration: "5s",
+            vus: 2,
             tags: { use_case: "login" },
         },
     },
 };
 
-export default function () {
+export default () => {
     scenarioLogin();
 }
 
-export function scenarioLogin() {
-    let res = http.get(`${Config.baseURLapi}/public/crocodiles/1/`);
-    check(res, { "status was 200": (r) => r.status == 200 });
+export const scenarioLogin = () => {
+    const reqBody = {
+        username: 'mor_2314',
+        password: '83r5^_'
+    };
+    const headers = {
+        'Content-Type': 'application/json',
+    };
+    const res = http.post(
+        `${Config.baseUrlHttpApi}/auth/login`,
+        JSON.stringify(reqBody),
+        { headers: headers },
+    );
+
+    const checkOutput = check(res, {
+        "status was 200": (r) => r.status == 200,
+        "token must valid string": (r) => typeof r.json().token === 'string',
+    });
+
+    if (!checkOutput) fail('unexpected response from scenarioLogin');
 };

@@ -14,3 +14,6 @@ ifeq ($(scenario),)
 else
 	@K6_ENV=${env} K6_WEB_DASHBOARD=${dashboard} k6 run scenarios/${scenario}.js
 endif
+
+mock-grpc-server:
+	@fauxrpc run --schema protobufs/hello.proto --addr="localhost:6660"

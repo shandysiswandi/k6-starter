@@ -32,6 +32,9 @@ There are multiple ways to install K6 on Windows:
     winget install k6 --source winget
     ```
 
+### Optional Tools
+- [gRPC Mock Server](https://fauxrpc.com/)
+
 ## Creating a Test Scenario File
 To create a test scenario file in JavaScript, follow these steps:
 
